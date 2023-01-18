@@ -1,31 +1,40 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Portfolio Project 3 Kerrie Jones
 
-Welcome kerrie-jones,
+In this section I will provide overview of project......
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+## User Experience
+User stories.....
 
-## Reminders
+## Features
+### Existing Features
+### Feature left to implement
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+## Testing
 
-## Creating the Heroku app
+### Validator Testing
+* PEP8 
+### Bugs
+### Remaining Bugs
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Deployment
+* Code Institute's mock terminal for Heroku was used to deploy this project
+### Steps for Deployment
+* Fork or clone this repository
+* Create a new Heroku app
+* Set buildbacks to Python and NodeJS in that order 
+* Link Heroku app to the repository
+* Click on Deploy
 
-1. `heroku/python`
-2. `heroku/nodejs`
+## Technologies Used
+### Languages Used
+### Frameworks, Libraries and Programmes Used
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## Credits
+* code institue for the deployment terminal
 
-Connect your GitHub repository and deploy as normal.
+### Online Tutorials
 
-## Constraints
+### Content
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
------
-Happy coding!
+### Media
