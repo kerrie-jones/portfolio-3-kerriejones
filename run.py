@@ -22,10 +22,10 @@ def login():
     uses if statement to call validate_login function
     if no errors will return true
     and while loop is stopped with break
-    if error will return false so while loop will repeat request for error
+    if error will return false so while loop will repeat request for login data
     """
     while True:
-        print("Please enter your name and staff number below")
+        print("Please enter your name and staff number below\n")
 
         name = input("Enter your name: ")
         staff_number = input("Enter your 8 digit staff number: ")
@@ -33,7 +33,7 @@ def login():
         validate_login(name, staff_number)
 
         if validate_login(name, staff_number):
-            print("Data is valid")
+            print("Data is valid\n")
             break
 
 
@@ -63,4 +63,20 @@ def validate_login(name, staff_number):
     return True
 
 
+def main_menu():
+    """
+    Main menu
+    Options 1,2,3,4
+    """
+    print("Main Menu\n")
+    print("Enter 1, 2, 3 or 4 for the following options\n")
+    print("1 - Number of forms outstanding ")
+    print("2 - See names and details with medical declarations")
+    print("3 - See Levels of riders")
+    print("4 - Logout\n5")
+
+    input("Enter 1, 2, 3 or 4 here: ")
+
+
 login()
+main_menu()
