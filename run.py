@@ -69,13 +69,33 @@ def main_menu():
     Options 1,2,3,4
     """
     print("Main Menu\n")
-    print("Enter 1, 2, 3 or 4 for the following options\n")
+    print("Enter 1, 2, 3 or 4 for the following options:\n")
     print("1 - Number of forms outstanding ")
-    print("2 - See names and details with medical declarations")
-    print("3 - See Levels of riders")
-    print("4 - Logout\n5")
+    print("2 - Names and details with medical declarations")
+    print("3 - Levels of riders")
+    print("4 - Logout\n")
 
-    input("Enter 1, 2, 3 or 4 here: ")
+    main_options = input("Enter 1, 2, 3 or 4 here: ")
+
+    validate_main_menu(main_options)
+   
+
+
+def validate_main_menu(main_options):
+    """
+    Raises ValueError if input is not 1,2,3 or 4
+    """
+
+    try:
+        if (main_options) != (1, 2, 3, 4):
+            raise ValueError(
+                "Enter 1,2,3 or 4"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e} please try again.\n")
+        return False
+
+    return True
 
 
 login()
