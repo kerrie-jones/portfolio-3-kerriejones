@@ -78,7 +78,6 @@ def main_menu():
     main_options = input("Enter 1, 2, 3 or 4 here: ")
 
     validate_main_menu(main_options)
-   
 
 
 def validate_main_menu(main_options):
@@ -87,7 +86,7 @@ def validate_main_menu(main_options):
     """
 
     try:
-        if (main_options) != (1, 2, 3, 4):
+        if (main_options) not in ('1', '2', '3', '4'):
             raise ValueError(
                 "Enter 1,2,3 or 4"
             )
