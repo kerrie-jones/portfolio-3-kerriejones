@@ -18,13 +18,23 @@ def login():
     get username and staff number input from user.
     error message will appear if data invalid
     If valid will bring user to main menu
+    runs a while loop that asks the user for data
+    uses if statement to call validate_login function
+    if no errors will return true
+    and while loop is stopped with break
+    if error will return false so while loop will repeat request for error
     """
-    print("Please enter your name and staff number below")
+    while True:
+        print("Please enter your name and staff number below")
 
-    name = input("Enter your name: ")
-    staff_number = input("Enter your 8 digit staff number: ")
+        name = input("Enter your name: ")
+        staff_number = input("Enter your 8 digit staff number: ")
 
-    validate_login(name, staff_number)
+        validate_login(name, staff_number)
+
+        if validate_login(name, staff_number):
+            print("Data is valid")
+            break
 
 
 def validate_login(name, staff_number):
@@ -44,19 +54,13 @@ def validate_login(name, staff_number):
                 )
         if len(staff_number) != 8:
             raise ValueError(
-                f"8 digits required for staff no. {len(staff_number)} entered"
+                f"8 digits required for staff no. {len(staff_number)}entered"
                 )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
+        return False
 
-    # )
-    # print(f"Hello {name}")
-    # if len(staff_number) != 8:
-    #     raise ValueError("invalid data please enter 8 digit number")
-    # if not staff_number.isnumeric():
-    #     raise ValueError("invalid data please enter numerical value only")
-
-    # print("Loading main menu...")
+    return True
 
 
 login()
