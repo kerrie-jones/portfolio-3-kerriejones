@@ -75,15 +75,14 @@ def main_menu():
         print("2 - Names and details with medical declarations")
         print("3 - Levels of riders")
         print("4 - Logout\n")
-
+        global main_options
         main_options = input("Enter 1, 2, 3 or 4 here: ")
 
         validate_main_menu(main_options)
 
         if validate_main_menu(main_options):
-            print("data is valid")
+            print(f"You chose no {main_options}")
             break
-   
 
 
 def validate_main_menu(main_options):
@@ -103,5 +102,26 @@ def validate_main_menu(main_options):
     return True
 
 
+def forms():
+    if main_options == '1':
+        print("forms info")
+
+def medical():
+    if main_options == '2':
+        print("Medical declarations")
+
+def rider_levels():
+    if main_options == '3':
+        print("Rider Levels")
+
+def logout():
+    if main_options == '4':
+        print("Logout")
+
+
 login()
 main_menu()
+forms()
+medical()
+rider_levels()
+logout()
