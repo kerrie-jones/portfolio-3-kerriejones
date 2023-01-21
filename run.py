@@ -79,6 +79,18 @@ def main_menu():
         if validate_main_menu(main_options):
             break
 
+    if main_options == '1':
+        forms()
+
+    if main_options == '2':
+        medical()
+
+    if main_options == '3':
+        rider_levels()
+
+    if main_options == '4':
+        logout()
+
 
 def validate_main_menu(main_options):
     """
@@ -101,8 +113,7 @@ def forms():
     """
     Checks how many forms have been submitted
     """
-    if main_options == '1':
-        print("forms info\n")
+    print("forms function ok")
 
 
 def medical():
@@ -111,29 +122,23 @@ def medical():
     Returns list with names and the medical details
     Sends this information to the medical worksheet
     """
-    if main_options == '2':
-        print("Medical declarations\n")
+    print("medical function ok")
 
 
 def rider_levels():
     """
     Returns list with rider names and number in each level
     """
-    if main_options == '3':
-        print("Rider Levels\n")
+    print("rider levels function ok")
 
 
 def logout():
     """
     Logout
     """
-    if main_options == '4':
-        print("You are logged out\n")
+    print("logout function ok")
 
 
 login()
 main_menu()
-forms()
-medical()
-rider_levels()
-logout()
+
