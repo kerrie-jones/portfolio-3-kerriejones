@@ -68,16 +68,22 @@ def main_menu():
     Main menu
     Options 1,2,3,4
     """
-    print("Main Menu\n")
-    print("Enter 1, 2, 3 or 4 for the following options:\n")
-    print("1 - Number of forms outstanding ")
-    print("2 - Names and details with medical declarations")
-    print("3 - Levels of riders")
-    print("4 - Logout\n")
+    while True:
+        print("Main Menu\n")
+        print("Enter 1, 2, 3 or 4 for the following options:\n")
+        print("1 - Number of forms outstanding ")
+        print("2 - Names and details with medical declarations")
+        print("3 - Levels of riders")
+        print("4 - Logout\n")
 
-    main_options = input("Enter 1, 2, 3 or 4 here: ")
+        main_options = input("Enter 1, 2, 3 or 4 here: ")
 
-    validate_main_menu(main_options)
+        validate_main_menu(main_options)
+
+        if validate_main_menu(main_options):
+            print("data is valid")
+            break
+   
 
 
 def validate_main_menu(main_options):
