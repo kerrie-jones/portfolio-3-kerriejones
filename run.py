@@ -30,8 +30,6 @@ def login():
         name = input("Enter your name: ")
         staff_number = input("Enter your 8 digit staff number: ")
 
-        validate_login(name, staff_number)
-
         if validate_login(name, staff_number):
             print("Data is valid\n")
             break
@@ -54,7 +52,7 @@ def validate_login(name, staff_number):
                 )
         if len(staff_number) != 8:
             raise ValueError(
-                f"8 digits required for staff no. {len(staff_number)}entered"
+                f"8 digits required for staff no. {len(staff_number)} entered"
                 )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
@@ -76,12 +74,9 @@ def main_menu():
         print("3 - Levels of riders")
         print("4 - Logout\n")
         global main_options
-        main_options = input("Enter 1, 2, 3 or 4 here: ")
-
-        validate_main_menu(main_options)
+        main_options = input("Enter number here: ")
 
         if validate_main_menu(main_options):
-            print(f"You chose no {main_options}")
             break
 
 
@@ -103,20 +98,37 @@ def validate_main_menu(main_options):
 
 
 def forms():
+    """
+    Checks how many forms have been submitted
+    """
     if main_options == '1':
-        print("forms info")
+        print("forms info\n")
+
 
 def medical():
+    """
+    Checks which students have medical declarations
+    Returns list with names and the medical details
+    Sends this information to the medical worksheet
+    """
     if main_options == '2':
-        print("Medical declarations")
+        print("Medical declarations\n")
+
 
 def rider_levels():
+    """
+    Returns list with rider names and number in each level
+    """
     if main_options == '3':
-        print("Rider Levels")
+        print("Rider Levels\n")
+
 
 def logout():
+    """
+    Logout
+    """
     if main_options == '4':
-        print("Logout")
+        print("You are logged out\n")
 
 
 login()
