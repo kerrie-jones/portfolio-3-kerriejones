@@ -11,6 +11,9 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
+forms_sheet = SHEET.worksheet("forms")
+forms_data = forms_sheet.get_all_values()
+eq453_class_size = 22
 
 
 def login():
@@ -67,14 +70,14 @@ def main_menu():
     Options 1,2,3,4
     """
     while True:
-        print("Main Menu\n")
+        print("Main Menu")
         print("Enter 1, 2, 3 or 4 for the following options:\n")
         print("1 - Number of forms outstanding ")
         print("2 - Names and details with medical declarations")
         print("3 - Levels of riders")
         print("4 - Logout\n")
         global main_options
-        main_options = input("Enter number here: ")
+        main_options = input("Option: ")
 
         if validate_main_menu(main_options):
             break
@@ -111,9 +114,17 @@ def validate_main_menu(main_options):
 
 def forms():
     """
-    Checks how many forms have been submitted
+    Counts rows of data in forms sheet and
+    subtracts 1 so headings row is not counted
+    subracts this from class size to get value for outstanding forms
     """
-    print("forms function ok")
+    # eq453_class_size = 22
+
+    submitted_forms = len(forms_data) - 1
+    outstanding_forms = eq453_class_size - submitted_forms
+    print(
+        f"{submitted_forms} forms submitted.\n{outstanding_forms} forms outstanding.\n"
+        )
 
 
 def medical():
@@ -141,4 +152,3 @@ def logout():
 
 login()
 main_menu()
-
