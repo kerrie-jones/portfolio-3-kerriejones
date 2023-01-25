@@ -153,7 +153,7 @@ def rider_levels():
     Returns list with rider names and number in each level
     """
 
-    df_levels = df.iloc[:, [0, 12]]
+    df_levels = df.iloc[1:, [0, 12]]
     df1 = df_levels.sort_values([12])
     print(df1)
 
