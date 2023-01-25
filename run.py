@@ -150,13 +150,28 @@ def medical():
 
 def rider_levels():
     """
-    Returns list with rider names and number in each level
+    Returns columns with index of 0 and 12
+    rider names and their level
+    rows are sorted by their level
+    These are printed to the terminal and the number of 
+    students in each level
     """
 
     df_levels = df.iloc[1:, [0, 12]]
     df1 = df_levels.sort_values([12])
-    print(df1)
-
+    beginner = df1[df1.values == 'Beginner'] 
+    novice = df1[df1.values == 'Novice']
+    intermediate = df1[df1.values == 'Intermediate'] 
+    advanced= df1[df1.values == 'Advanced'] 
+    print("\nNumber of riders in each level:")
+    print(f"\n--{len(beginner)} BEGINNER RIDERS--")
+    print(beginner)
+    print(f"\n--{len(novice)} NOVICE RIDERS--")
+    print(novice)
+    print(f"\n--{len(intermediate)} INTERMEDIATE RIDERS--")
+    print(intermediate)
+    print(f"\n--{len(advanced)} ADVANCED RIDERS--")
+    print(advanced)
 
 def logout():
     """
