@@ -1,5 +1,8 @@
+from pprint import pprint as pp
 import gspread
 from google.oauth2.service_account import Credentials
+import pandas as pd
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -11,9 +14,16 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
+
 forms_sheet = SHEET.worksheet("forms")
 forms_data = forms_sheet.get_all_values()
+forms_dict = forms_sheet.get_all_records()
+df = pd.DataFrame(forms_sheet.get_all_values())
 eq453_class_size = 22
+
+
+# levels = SHEET.worksheet("levels")
+# medical = SHEET.worksheet("medical")
 
 
 def login():
@@ -118,12 +128,11 @@ def forms():
     subtracts 1 so headings row is not counted
     subracts this from class size to get value for outstanding forms
     """
-    # eq453_class_size = 22
-
     submitted_forms = len(forms_data) - 1
     outstanding_forms = eq453_class_size - submitted_forms
     print(
-        f"{submitted_forms} forms submitted.\n{outstanding_forms} forms outstanding.\n"
+        f"{submitted_forms} forms submitted.\n{outstanding_forms} \
+            forms outstanding.\n"
         )
 
 
@@ -131,16 +140,22 @@ def medical():
     """
     Checks which students have medical declarations
     Returns list with names and the medical details
-    Sends this information to the medical worksheet
+    Updates medical sheet with these
     """
     print("medical function ok")
-
+    df_medical = df.iloc[:, [0, 8, 9]]
+    print(df_medical)
+    
+  
 
 def rider_levels():
     """
     Returns list with rider names and number in each level
     """
-    print("rider levels function ok")
+
+    df_levels = df.iloc[:, [0, 12]]
+    df1 = df_levels.sort_values([12])
+    print(df1)
 
 
 def logout():
