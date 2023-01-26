@@ -29,7 +29,7 @@ This project has been manually tested by:
 ## Bugs
 ### Solved Bugs
 * when name and staff number were validated if there was an error both needed to be inputted again. Corrected this by separating validation forboth inputs.
-*
+* After each information option was chosen user needed to enter name and staff number again returned user to main menu function after each optional function instead to correct.
 *
 *
 ### Remaining Bugs

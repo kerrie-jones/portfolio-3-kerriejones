@@ -105,7 +105,7 @@ def main_menu():
 
         if validate_main_menu(main_options):
             break
-    
+  
     if main_options == '1':
         forms()
     elif main_options == '2':
@@ -114,7 +114,7 @@ def main_menu():
         rider_levels()
     elif main_options == '4':
         exit()
-      
+   
 
 def validate_main_menu(main_options):
     """
@@ -138,6 +138,7 @@ def forms():
     subtracts 1 so headings row is not counted
     subracts this from class size to get value for outstanding forms
     """
+    print("No. of forms outstanding:")
     submitted_forms = len(forms_data) - 1
     outstanding_forms = eq453_class_size - submitted_forms
     print(
@@ -152,6 +153,7 @@ def medical():
     Checks which students have medical declarations
     Returns list with names of students who have declared a medical condition
     """
+    print("Students with medical declarations:")
     df_medical = df.iloc[1:, [0, 8, 9, 10]]
     df3 = df_medical[8].str.contains('a')
     medical_true = df_medical[df3.values == True]
