@@ -38,17 +38,19 @@ def login():
     if error will return false so while loop will repeat request for login data
     """
     while True:
-        print("Please enter your name and staff number below\n")
-
         name = input("Enter your name: ")
-        staff_number = input("Enter your 8 digit staff number: ")
+        if validate_name(name):
+            print("Data is valid\n")
+            break
 
-        if validate_login(name, staff_number):
+    while True:
+        staff_number = input("Enter your 8 digit staff number: ")
+        if validate_staff_number(staff_number):
             print("Data is valid\n")
             break
 
 
-def validate_login(name, staff_number):
+def validate_name(name):
     """
     Raises value error if name is not letter.
     Raises ValueError if there arent exactly 8 values in staffnumber
@@ -59,6 +61,18 @@ def validate_login(name, staff_number):
             raise ValueError(
                 "no symbols or numbers allowed in name"
                 )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again\n")
+        return False
+
+    return True
+
+
+def validate_staff_number(staff_number):
+    """
+    checks staff number
+    """
+    try:
         if not staff_number.isnumeric():
             raise ValueError(
                 "non numeric value entered in staff number"
@@ -85,7 +99,7 @@ def main_menu():
         print("1 - Number of forms outstanding ")
         print("2 - Names and details with medical declarations")
         print("3 - Levels of riders")
-        print("4 - Logout\n")
+        print("4 - Exit\n")
         global main_options
         main_options = input("Option: ")
 
@@ -102,14 +116,13 @@ def main_menu():
         rider_levels()
 
     if main_options == '4':
-        logout()
+        exit()
 
 
 def validate_main_menu(main_options):
     """
     Raises ValueError if input is not 1,2,3 or 4
     """
-
     try:
         if (main_options) not in ('1', '2', '3', '4'):
             raise ValueError(
@@ -131,38 +144,37 @@ def forms():
     submitted_forms = len(forms_data) - 1
     outstanding_forms = eq453_class_size - submitted_forms
     print(
-        f"{submitted_forms} forms submitted.\n{outstanding_forms} \
-            forms outstanding.\n"
+        f"{submitted_forms} forms submitted.\
+        {outstanding_forms} forms outstanding.\n"
         )
 
 
 def medical():
     """
     Checks which students have medical declarations
-    Returns list with names and the medical details
-    Updates medical sheet with these
+    Returns list with names of students who have declared a medical condition
     """
-    print("medical function ok")
-    df_medical = df.iloc[:, [0, 8, 9]]
-    print(df_medical)
-    
-  
+    df_medical = df.iloc[1:, [0, 8, 9, 10]]
+    df3 = df_medical[8].str.contains('a')
+    medical_true = df_medical[df3.values == True]
+    print(medical_true)
+    # dict = medical_true.to_dict()
+    # print(dict)
+
 
 def rider_levels():
     """
     Returns columns with index of 0 and 12
     rider names and their level
     rows are sorted by their level
-    These are printed to the terminal and the number of 
+    These are printed to the terminal and the number of
     students in each level
     """
-
     df_levels = df.iloc[1:, [0, 12]]
-    df1 = df_levels.sort_values([12])
-    beginner = df1[df1.values == 'Beginner'] 
-    novice = df1[df1.values == 'Novice']
-    intermediate = df1[df1.values == 'Intermediate'] 
-    advanced= df1[df1.values == 'Advanced'] 
+    beginner = df_levels[df_levels.values == 'Beginner']
+    novice = df_levels[df_levels.values == 'Novice']
+    intermediate = df_levels[df_levels.values == 'Intermediate']
+    advanced = df_levels[df_levels.values == 'Advanced']
     print("\nNumber of riders in each level:")
     print(f"\n--{len(beginner)} BEGINNER RIDERS--")
     print(beginner)
@@ -173,11 +185,12 @@ def rider_levels():
     print(f"\n--{len(advanced)} ADVANCED RIDERS--")
     print(advanced)
 
-def logout():
+
+def exit():
     """
-    Logout
+    Exit main menu
     """
-    print("logout function ok")
+    print("Exiting...")
 
 
 login()
