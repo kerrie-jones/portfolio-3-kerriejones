@@ -105,19 +105,16 @@ def main_menu():
 
         if validate_main_menu(main_options):
             break
-
+    
     if main_options == '1':
         forms()
-
-    if main_options == '2':
+    elif main_options == '2':
         medical()
-
-    if main_options == '3':
+    elif main_options == '3':
         rider_levels()
-
-    if main_options == '4':
+    elif main_options == '4':
         exit()
-
+      
 
 def validate_main_menu(main_options):
     """
@@ -147,6 +144,7 @@ def forms():
         f"{submitted_forms} forms submitted.\
         {outstanding_forms} forms outstanding.\n"
         )
+    main_menu()
 
 
 def medical():
@@ -160,6 +158,7 @@ def medical():
     print(medical_true)
     # dict = medical_true.to_dict()
     # print(dict)
+    main_menu()
 
 
 def rider_levels():
@@ -184,6 +183,7 @@ def rider_levels():
     print(intermediate)
     print(f"\n--{len(advanced)} ADVANCED RIDERS--")
     print(advanced)
+    main_menu()
 
 
 def exit():
