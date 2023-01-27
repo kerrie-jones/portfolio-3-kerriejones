@@ -94,7 +94,7 @@ def main_menu():
     Options 1,2,3,4
     """
     while True:
-        print("Main Menu")
+        print("\nMain Menu")
         print("Enter 1, 2, 3 or 4 for the following options:\n")
         print("1 - Number of forms outstanding ")
         print("2 - Names and details with medical declarations")
@@ -158,8 +158,11 @@ def medical():
     df3 = df_medical[8].str.contains('a')
     medical_true = df_medical[df3.values == True]
     print(medical_true)
-    # dict = medical_true.to_dict()
-    # print(dict)
+    print("\nMedical Details and if Doctor approved participation:\n")
+    medical_details = medical_true.values.tolist()
+    print(*medical_details, sep = "\n")
+    # medical_details = medical_true.to_dict()
+    # print(medical_details)
     main_menu()
 
 
