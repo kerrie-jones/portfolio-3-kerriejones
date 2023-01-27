@@ -1,4 +1,3 @@
-from pprint import pprint as pp
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
@@ -38,13 +37,13 @@ def login():
     if error will return false so while loop will repeat request for login data
     """
     while True:
-        name = input("Enter your name: ")
+        name = input("Enter your name: \n")
         if validate_name(name):
             print("Data is valid\n")
             break
 
     while True:
-        staff_number = input("Enter your 8 digit staff number: ")
+        staff_number = input("Enter your 8 digit staff number: \n")
         if validate_staff_number(staff_number):
             print("Data is valid\n")
             break
@@ -101,11 +100,11 @@ def main_menu():
         print("3 - Levels of riders")
         print("4 - Exit\n")
         global main_options
-        main_options = input("Option: ")
+        main_options = input("Option: \n")
 
         if validate_main_menu(main_options):
             break
-  
+
     if main_options == '1':
         forms()
     elif main_options == '2':
@@ -113,8 +112,8 @@ def main_menu():
     elif main_options == '3':
         rider_levels()
     elif main_options == '4':
-        exit()
-   
+        exit_menu()
+
 
 def validate_main_menu(main_options):
     """
@@ -160,7 +159,7 @@ def medical():
     print(medical_true)
     print("\nMedical Details and if Doctor approved participation:\n")
     medical_details = medical_true.values.tolist()
-    print(*medical_details, sep = "\n")
+    print(*medical_details, sep="\n")
     # medical_details = medical_true.to_dict()
     # print(medical_details)
     main_menu()
@@ -191,7 +190,7 @@ def rider_levels():
     main_menu()
 
 
-def exit():
+def exit_menu():
     """
     Exit main menu
     """
