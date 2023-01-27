@@ -1,3 +1,8 @@
+"""
+Initial code for scope and linking to
+google sheets taken from love-sandwiches
+walkthrough by code institute
+"""
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
@@ -21,20 +26,13 @@ df = pd.DataFrame(forms_sheet.get_all_values())
 eq453_class_size = 22
 
 
-# levels = SHEET.worksheet("levels")
-# medical = SHEET.worksheet("medical")
-
-
 def login():
     """
     get username and staff number input from user.
     error message will appear if data invalid
     If valid will bring user to main menu
-    runs a while loop that asks the user for data
-    uses if statement to call validate_login function
-    if no errors will return true
-    and while loop is stopped with break
-    if error will return false so while loop will repeat request for login data
+    while loop so that if incorrect input loop will
+    request input from user again until valid data entered
     """
     while True:
         name = input("Enter your name: \n")
@@ -52,8 +50,6 @@ def login():
 def validate_name(name):
     """
     Raises value error if name is not letter.
-    Raises ValueError if there arent exactly 8 values in staffnumber
-    Raises ValueError if staffnumber is not numeric
     """
     try:
         if not name.isalpha():
@@ -69,7 +65,8 @@ def validate_name(name):
 
 def validate_staff_number(staff_number):
     """
-    checks staff number
+    Raises ValueError if there arent exactly 8 values in staffnumber
+    Raises ValueError if staffnumber is not numeric
     """
     try:
         if not staff_number.isnumeric():
@@ -91,12 +88,14 @@ def main_menu():
     """
     Main menu
     Options 1,2,3,4
+    while loop so that if incorrect input loop will
+    request input from user again until valid data entered
     """
     while True:
         print("\nMain Menu")
         print("Enter 1, 2, 3 or 4 for the following options:\n")
-        print("1 - Number of forms outstanding ")
-        print("2 - Names and details with medical declarations")
+        print("1 - Forms Outstanding ")
+        print("2 - Medical declarations")
         print("3 - Levels of riders")
         print("4 - Exit\n")
         global main_options
@@ -117,12 +116,12 @@ def main_menu():
 
 def validate_main_menu(main_options):
     """
-    Raises ValueError if input is not 1,2,3 or 4
+    Raises ValueError if input is not '1', '2', '3' or '4'
     """
     try:
         if (main_options) not in ('1', '2', '3', '4'):
             raise ValueError(
-                "Enter 1,2,3 or 4"
+                "Enter 1,2,3 or 4:"
             )
     except ValueError as e:
         print(f"Invalid data: {e} please try again.\n")
@@ -150,18 +149,18 @@ def forms():
 def medical():
     """
     Checks which students have medical declarations
-    Returns list with names of students who have declared a medical condition
+    Returns list with name and details from relevant
+    columns of students who have declared a medical condition
     """
     print("Students with medical declarations:")
     df_medical = df.iloc[1:, [0, 8, 9, 10]]
     df3 = df_medical[8].str.contains('a')
+    # PEP8 error: (158: E712 comparison to True should be 'if cond is True)
     medical_true = df_medical[df3.values == True]
     print(medical_true)
     print("\nMedical Details and if Doctor approved participation:\n")
     medical_details = medical_true.values.tolist()
     print(*medical_details, sep="\n")
-    # medical_details = medical_true.to_dict()
-    # print(medical_details)
     main_menu()
 
 
@@ -169,7 +168,6 @@ def rider_levels():
     """
     Returns columns with index of 0 and 12
     rider names and their level
-    rows are sorted by their level
     These are printed to the terminal and the number of
     students in each level
     """
