@@ -35,7 +35,7 @@ def login():
     request input from user again until valid data entered
     """
     while True:
-        name = input("Enter your name: \n")
+        name = input("Enter your name with no spaces: \n")
         if validate_name(name):
             print("Data is valid\n")
             break
@@ -54,7 +54,7 @@ def validate_name(name):
     try:
         if not name.isalpha():
             raise ValueError(
-                "no symbols or numbers allowed in name"
+                "no symbols, numbers or spaces allowed"
                 )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
