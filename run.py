@@ -3,29 +3,11 @@ Initial code for scope and linking to
 google sheets taken from love-sandwiches
 walkthrough by code institute
 """
-from time import sleep
-import os
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
-
-SCOPE = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive.file",
-        "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
-
-forms_sheet = SHEET.worksheet("forms")
-forms_data = forms_sheet.get_all_values()
-forms_dict = forms_sheet.get_all_records()
-data_frame = pd.DataFrame(forms_sheet.get_all_values())
-class_size = 22
-main_options = None
+from time import sleep
+import os
 
 
 def login():
@@ -195,7 +177,24 @@ def rider_levels():
     sleep(12)
     os.system('cls' if os.name == 'nt' else 'clear')
 
-login()
-main_menu()
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
+
+    forms_sheet = SHEET.worksheet("forms")
+    forms_data = forms_sheet.get_all_values()
+    forms_dict = forms_sheet.get_all_records()
+    data_frame = pd.DataFrame(forms_sheet.get_all_values())
+    class_size = 22
+    main_options = None
+    login()
+    main_menu()
