@@ -7,12 +7,22 @@ The teachers on the course can use this application to find relevant and specifi
 Flowchart was created in lucidchart to plan and then implement project
 <img src="./documents/flowchart/flowchart.png" width="600px">
 
+* Google Forms \
+Form is filled in by students in google forms \
+<img src="./documents/google_forms_sheets/googleforms1.png" width="300px">
+<img src="./documents/google_forms_sheets/googleforms2.png" width="300px"> 
+<img src="./documents/google_forms_sheets/googleforms3.png" width="300px"> 
+
+* Google Sheets \
+Information from Google Forms is then opened in GoogleSheets
+<img src="./documents/google_forms_sheets/googlesheets.png" width="600px">
+
 # How to Use
 User enters name and staff number. Main menu will appear with 4 options. Number of forms outstanding, Names and details with medical declarations, Levels of riders and Exit. User chooses what information they need and application will return requested information.
 
 ## User Experience
 ### External User: 
-The application user wants to glean specific insights from student intake forms quickly and conveniently without having to search through all the forms manually.
+* The application user wants to glean specific insights from student intake forms quickly and conveniently without having to search through all the forms manually.
 ### Site owner:  
 The application should provide useful insights from a dataset created from Google forms
 
@@ -21,7 +31,7 @@ The application should provide useful insights from a dataset created from Googl
 <img src="./documents/features/features_start.png" width="600px"> 
 
 ### Enter Name
-Application requests name. ValueError raised if input is not letters.
+Application requests name. ValueError raised if input is not letters. \
 <img src="./documents/features/features _invalid_name.png" width="600px"> 
 
 ### Enter Staff Number
@@ -37,28 +47,29 @@ The amount of forms submitted and forms outstanding is printed in the terminal f
 <img src="./documents/features/features_forms.png" width="600px"> 
 
 ### 2 Medical Declarations
-This option checks which students have medical declaration and prints their names to the terminal. After this a list with the details of declaration for each student is also printed to the terminal along with if their doctor has approved them to participate in equestrian activities.
+This option checks which students have medical declaration and prints their names to the terminal. After this a list with the details of declaration for each student is also printed to the terminal along with if their doctor has approved them to participate in equestrian activities. \
 <img src="./documents/features/features_medical.png" width="600px"> 
 
 ### 3 Level of Riders
-Columns with student name and level only are printed to the terminal grouped by level: beginner, novice, intermediate and advanced. 
+Columns with student name and level only are printed to the terminal grouped by level: beginner, novice, intermediate and advanced. \
 <img src="./documents/features/features_level_1.png" width="600px">
 <img src="./documents/features/features_level_2.png" width="600px">
 
 ### 4 Exit
-Exits main menu
+Exits main menu \
 <img src="./documents/features/features_exit.png" width="600px">
 
 ## Future Features
+I would like to implement a login process as while this data is fictional if real data were used a secure login for staff members would be needed.
+
 
 # Data Model
 
 # Testing
 This project has been manually tested by:
-* passing code through a PEP8 linter and ensuring there are no signifigant errors
+* passing code through a PEP8 linter. I received an error code 
 * Checked validation by entering number where letters should be and vice versa and tried entering incorrect staff number length
 * tested both in local and heroku terminal
-
 
 ## Validator Testing
 * PEP8 
@@ -66,8 +77,6 @@ This project has been manually tested by:
 ### Solved Bugs
 * when name and staff number were validated if there was an error both needed to be inputted again. Corrected this by separating validation forboth inputs.
 * After each information option was chosen user needed to enter name and staff number again returned user to main menu function after each optional function instead to correct.
-*
-*
 ### Remaining Bugs
 * No remaining bugs found
 

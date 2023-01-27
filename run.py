@@ -9,6 +9,7 @@ import pandas as pd
 from time import sleep
 import os
 
+
 def login():
     """
     get username and staff number input from user.
@@ -95,8 +96,8 @@ def main_menu():
         elif main_options == '4':
             print("Exiting...")
             show_menu = False
-        sleep(5)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        # sleep(7)
+        # os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def validate_main_menu(main_options):
@@ -113,7 +114,7 @@ def validate_main_menu(main_options):
         return False
 
     return True
-
+    
 
 def forms():
     """
@@ -123,12 +124,13 @@ def forms():
     """
     print("No. of forms outstanding:")
     submitted_forms = len(forms_data) - 1
-    outstanding_forms = eq453_class_size - submitted_forms
+    outstanding_forms = class_size - submitted_forms
     print(
         f"{submitted_forms} forms submitted.\
         {outstanding_forms} forms outstanding.\n"
         )
-    # main_menu()
+    sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def medical():
@@ -138,11 +140,10 @@ def medical():
     columns of students who have declared a medical condition
     """
     print("Students with medical declarations:")
-    df_medical = df.iloc[1:, [0, 8, 9, 10]]
-    df3 = df_medical[8].str.contains(" ")
+    df_medical = data_frame.iloc[1:, [0, 8, 9, 10]]
+    df_string = df_medical[8].str.contains(" ")
     # PEP8 error: (158: E712 comparison to True should be 'if cond is True)
-    medical_true = df_medical[df3.values == True]
-    # print(medical_true)
+    medical_true = df_medical[df_string.values == True]
     print("\nMedical Details and if Doctor approved participation:\n")
     medical_details = medical_true.values.tolist()
     for detail in medical_details:
@@ -150,6 +151,9 @@ def medical():
         print(f"{detail[0]} - {detail[1]} ? \n")
         print(f"{detail[2]} - Doctor Appproved ? : {detail[3]}")
         print("************************************************** \n")
+    sleep(12)
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def rider_levels():
     """
@@ -158,7 +162,7 @@ def rider_levels():
     These are printed to the terminal and the number of
     students in each level
     """
-    df_levels = df.iloc[1:, [0, 12]]
+    df_levels = data_frame.iloc[1:, [0, 12]]
     beginner = df_levels[df_levels.values == 'Beginner']
     novice = df_levels[df_levels.values == 'Novice']
     intermediate = df_levels[df_levels.values == 'Intermediate']
@@ -172,7 +176,8 @@ def rider_levels():
     print(intermediate)
     print(f"\n--{len(advanced)} ADVANCED RIDERS--")
     print(advanced)
-    # main_menu()
+    sleep(12)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 if __name__ == "__main__":
@@ -190,8 +195,8 @@ if __name__ == "__main__":
     forms_sheet = SHEET.worksheet("forms")
     forms_data = forms_sheet.get_all_values()
     forms_dict = forms_sheet.get_all_records()
-    df = pd.DataFrame(forms_sheet.get_all_values())
-    eq453_class_size = 22
+    data_frame = pd.DataFrame(forms_sheet.get_all_values())
+    class_size = 22
     main_options = None
     login()
     main_menu()
