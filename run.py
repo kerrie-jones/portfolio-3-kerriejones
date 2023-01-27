@@ -6,8 +6,8 @@ walkthrough by code institute
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
-from time import sleep
-import os
+# from time import sleep
+# import os
 
 
 def login():
@@ -86,7 +86,7 @@ def main_menu():
         while option_invalid:
             main_options = input("Option: \n")
             option_invalid = not validate_main_menu(main_options)
-        os.system('cls' if os.name == 'nt' else 'clear')
+        # os.system('cls' if os.name == 'nt' else 'clear')
         if main_options == '1':
             forms()
         elif main_options == '2':
@@ -127,8 +127,8 @@ def forms():
         f"{submitted_forms} forms submitted.\
         {outstanding_forms} forms outstanding.\n"
         )
-    sleep(3)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    # sleep(3)
+    # os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def medical():
@@ -149,8 +149,8 @@ def medical():
         print(f"{detail[0]} - {detail[1]} ? \n")
         print(f"{detail[2]} - Doctor Appproved ? : {detail[3]}")
         print("************************************************** \n")
-    sleep(12)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    # sleep(12)
+    # os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def rider_levels():
@@ -174,8 +174,8 @@ def rider_levels():
     print(intermediate)
     print(f"\n--{len(advanced)} ADVANCED RIDERS--")
     print(advanced)
-    sleep(12)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    # sleep(12)
+    # os.system('cls' if os.name == 'nt' else 'clear')
 
 
 if __name__ == "__main__":
