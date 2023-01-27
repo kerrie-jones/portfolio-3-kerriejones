@@ -6,25 +6,8 @@ walkthrough by code institute
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
-
-
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
-
-forms_sheet = SHEET.worksheet("forms")
-forms_data = forms_sheet.get_all_values()
-forms_dict = forms_sheet.get_all_records()
-df = pd.DataFrame(forms_sheet.get_all_values())
-eq453_class_size = 22
-
+from time import sleep
+import os
 
 def login():
     """
@@ -59,7 +42,6 @@ def validate_name(name):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again\n")
         return False
-
     return True
 
 
@@ -91,27 +73,30 @@ def main_menu():
     while loop so that if incorrect input loop will
     request input from user again until valid data entered
     """
-    while True:
+    show_menu = True
+    while show_menu:
         print("\nMain Menu")
         print("Enter 1, 2, 3 or 4 for the following options:\n")
         print("1 - Forms Outstanding ")
         print("2 - Medical declarations")
         print("3 - Levels of riders")
         print("4 - Exit\n")
-        global main_options
-        main_options = input("Option: \n")
-
-        if validate_main_menu(main_options):
-            break
-
-    if main_options == '1':
-        forms()
-    elif main_options == '2':
-        medical()
-    elif main_options == '3':
-        rider_levels()
-    elif main_options == '4':
-        exit_menu()
+        option_invalid = True
+        while option_invalid:
+            main_options = input("Option: \n")
+            option_invalid = not validate_main_menu(main_options)
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if main_options == '1':
+            forms()
+        elif main_options == '2':
+            medical()
+        elif main_options == '3':
+            rider_levels()
+        elif main_options == '4':
+            print("Exiting...")
+            show_menu = False
+        sleep(5)
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def validate_main_menu(main_options):
@@ -143,7 +128,7 @@ def forms():
         f"{submitted_forms} forms submitted.\
         {outstanding_forms} forms outstanding.\n"
         )
-    main_menu()
+    # main_menu()
 
 
 def medical():
@@ -154,15 +139,17 @@ def medical():
     """
     print("Students with medical declarations:")
     df_medical = df.iloc[1:, [0, 8, 9, 10]]
-    df3 = df_medical[8].str.contains('a')
+    df3 = df_medical[8].str.contains(" ")
     # PEP8 error: (158: E712 comparison to True should be 'if cond is True)
     medical_true = df_medical[df3.values == True]
-    print(medical_true)
+    # print(medical_true)
     print("\nMedical Details and if Doctor approved participation:\n")
     medical_details = medical_true.values.tolist()
-    print(*medical_details, sep="\n")
-    main_menu()
-
+    for detail in medical_details:
+        print("**************************************************")
+        print(f"{detail[0]} - {detail[1]} ? \n")
+        print(f"{detail[2]} - Doctor Appproved ? : {detail[3]}")
+        print("************************************************** \n")
 
 def rider_levels():
     """
@@ -185,15 +172,26 @@ def rider_levels():
     print(intermediate)
     print(f"\n--{len(advanced)} ADVANCED RIDERS--")
     print(advanced)
+    # main_menu()
+
+
+if __name__ == "__main__":
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
+
+    forms_sheet = SHEET.worksheet("forms")
+    forms_data = forms_sheet.get_all_values()
+    forms_dict = forms_sheet.get_all_records()
+    df = pd.DataFrame(forms_sheet.get_all_values())
+    eq453_class_size = 22
+    main_options = None
+    login()
     main_menu()
-
-
-def exit_menu():
-    """
-    Exit main menu
-    """
-    print("Exiting...")
-
-
-login()
-main_menu()
