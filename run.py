@@ -3,11 +3,29 @@ Initial code for scope and linking to
 google sheets taken from love-sandwiches
 walkthrough by code institute
 """
+from time import sleep
+import os
 import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
-# from time import sleep
-# import os
+
+SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
+
+forms_sheet = SHEET.worksheet("forms")
+forms_data = forms_sheet.get_all_values()
+forms_dict = forms_sheet.get_all_records()
+data_frame = pd.DataFrame(forms_sheet.get_all_values())
+class_size = 22
+main_options = None
 
 
 def login():
@@ -86,7 +104,7 @@ def main_menu():
         while option_invalid:
             main_options = input("Option: \n")
             option_invalid = not validate_main_menu(main_options)
-        # os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear')
         if main_options == '1':
             forms()
         elif main_options == '2':
@@ -127,8 +145,8 @@ def forms():
         f"{submitted_forms} forms submitted.\
         {outstanding_forms} forms outstanding.\n"
         )
-    # sleep(3)
-    # os.system('cls' if os.name == 'nt' else 'clear')
+    sleep(3)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def medical():
@@ -149,8 +167,8 @@ def medical():
         print(f"{detail[0]} - {detail[1]} ? \n")
         print(f"{detail[2]} - Doctor Appproved ? : {detail[3]}")
         print("************************************************** \n")
-    # sleep(12)
-    # os.system('cls' if os.name == 'nt' else 'clear')
+    sleep(12)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def rider_levels():
@@ -174,27 +192,12 @@ def rider_levels():
     print(intermediate)
     print(f"\n--{len(advanced)} ADVANCED RIDERS--")
     print(advanced)
-    # sleep(12)
-    # os.system('cls' if os.name == 'nt' else 'clear')
+    sleep(12)
+    os.system('cls' if os.name == 'nt' else 'clear')
 
+login()
+main_menu()
 
-if __name__ == "__main__":
-    SCOPE = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive.file",
-        "https://www.googleapis.com/auth/drive"
-    ]
-
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SHEET = GSPREAD_CLIENT.open('EQ6453 Intake Forms')
-
-    forms_sheet = SHEET.worksheet("forms")
-    forms_data = forms_sheet.get_all_values()
-    forms_dict = forms_sheet.get_all_records()
-    data_frame = pd.DataFrame(forms_sheet.get_all_values())
-    class_size = 22
-    main_options = None
-    login()
-    main_menu()
+# if __name__ == "__main__":
+   
+   
