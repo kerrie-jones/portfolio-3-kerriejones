@@ -114,7 +114,7 @@ def validate_main_menu(main_options):
         return False
 
     return True
-    
+
 
 def forms():
     """
@@ -200,3 +200,4 @@ if __name__ == "__main__":
     main_options = None
     login()
     main_menu()
+
