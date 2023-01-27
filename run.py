@@ -96,8 +96,6 @@ def main_menu():
         elif main_options == '4':
             print("Exiting...")
             show_menu = False
-        # sleep(7)
-        # os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def validate_main_menu(main_options):
@@ -200,4 +198,3 @@ if __name__ == "__main__":
     main_options = None
     login()
     main_menu()
-
